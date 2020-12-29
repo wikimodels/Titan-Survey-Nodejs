@@ -1,0 +1,27 @@
+{
+  "name": "titan-survey-nodejs",
+  "version": "1.0.0",
+  "description": "picking up ip address from clients",
+  "main": "server.js",
+  "scripts": {
+    "deploy": "gcloud app deploy",    
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wikimodels/Titan-Survey-Nodejs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wikimodels/Titan-Survey-Nodejs/issues"
+  },
+  "homepage": "https://github.com/wikimodels/Titan-Survey-Nodejs#readme",
+  "dependencies": {
+    "@supercharge/request-ip": "^1.1.2",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.6"
+  }
+}
