@@ -1,12 +1,16 @@
+require("custom-env").env();
 const express = require("express");
 const app = express();
+//const envVariables = process.env;
+// Read vars from envVariables object
+//const { APP } = envVariables;
 app.use(function (req, res, next) {
   const allowedOrigins = [
     "http://127.0.0.1:8020",
     "http://localhost:4200",
     "http://127.0.0.1:9000",
     "http://localhost:5000",
-    "https://titan-survey-23b0a.web.app",
+    process.env["APP"],
   ];
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {
@@ -34,6 +38,7 @@ app.use(function (req, res, next) {
 });
 
 app.get("/", (req, res) => {
+  console.log("App", process.env["APP"]);
   var ip =
     req.headers["x-forwarded-for"] ||
     req.connection.remoteAddress ||
@@ -47,45 +52,3 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}...`);
 });
-
-// const express = require("express");
-// const { getClientIp } = require("@supercharge/request-ip");
-
-// const port = 3000;
-// const app = express();
-
-// const expressMiddleware = function (req, res, next) {
-//   req.ip = getClientIp(req);
-//   next();
-// };
-// app.get(
-//   "/",
-//   (req, res) => {
-//     const myIp = getClientAddress(req);
-//     console.log("IP!!!", myIp);
-//     res.send({ ip: req.ip });
-//   },
-//   expressMiddleware
-// );
-// app.get(
-//   "/ip",
-//   (req, res) => {
-//     const myIp = getClientAddress(req);
-//     console.log("IP!!!", myIp);
-//     res.send({ ip: req.ip });
-//   },
-//   expressMiddleware
-// );
-
-// const server = app.listen(port, () => {
-//   const host = server.address().address;
-//   const port = server.address().port;
-//   console.log(`Servier is listening on ${host}: ${port}`);
-// });
-
-// getClientAddress = function (req) {
-//   return (
-//     (req.headers["x-forwarded-for"] || "").split(",")[0] ||
-//     req.connection.remoteAddress
-//   );
-// };

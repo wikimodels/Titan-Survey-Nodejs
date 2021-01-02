@@ -4,7 +4,7 @@
   "description": "picking up ip address from clients",
   "main": "server.js",
   "scripts": {
-    "deploy": "gcloud app deploy",    
+    "deploy": "gcloud app deploy",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
@@ -21,6 +21,7 @@
   "dependencies": {
     "@supercharge/request-ip": "^1.1.2",
     "body-parser": "^1.19.0",
+    "custom-env": "^2.0.1",
     "express": "^4.17.1",
     "nodemon": "^2.0.6"
   }
