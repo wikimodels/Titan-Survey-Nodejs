@@ -1,5 +1,6 @@
 require("custom-env").env();
 const express = require("express");
+const fs = require("fs");
 const app = express();
 //const envVariables = process.env;
 // Read vars from envVariables object
@@ -45,6 +46,18 @@ app.get("/", (req, res) => {
     req.socket.remoteAddress ||
     (req.connection.socket ? req.connection.socket.remoteAddress : null);
   res.json({ ip: ip });
+});
+
+app.get("/download", (req, res) => {
+  {
+    root: __dirname;
+  }
+  {
+    root: __dirname;
+  }
+  res.sendFile("hello.txt", { root: __dirname }, function (err) {
+    console.log(err);
+  });
 });
 
 // Listen to the App Engine-specified port, or 8080 otherwise
