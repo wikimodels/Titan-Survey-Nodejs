@@ -20,9 +20,11 @@
   "homepage": "https://github.com/wikimodels/Titan-Survey-Nodejs#readme",
   "dependencies": {
     "@supercharge/request-ip": "^1.1.2",
+    "binary-file": "^0.2.3",
     "body-parser": "^1.19.0",
     "custom-env": "^2.0.1",
     "express": "^4.17.1",
+    "express-useragent": "^1.0.15",
     "nodemon": "^2.0.6"
   }
 }

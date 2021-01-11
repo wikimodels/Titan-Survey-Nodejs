@@ -1,6 +1,7 @@
 require("custom-env").env();
 const express = require("express");
-const fs = require("fs");
+const useragent = require("express-useragent");
+const { randomBytes } = require("crypto");
 const app = express();
 //const envVariables = process.env;
 // Read vars from envVariables object
@@ -11,7 +12,8 @@ app.use(function (req, res, next) {
     "http://localhost:4200",
     "http://127.0.0.1:9000",
     "http://localhost:5000",
-    process.env["APP"],
+    process.env["SURVEY_APP"],
+    process.env["REPORT_APP"],
   ];
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {
@@ -48,19 +50,16 @@ app.get("/", (req, res) => {
   res.json({ ip: ip });
 });
 
-app.get("/download", (req, res) => {
-  {
-    root: __dirname;
+app.get("/data", (req, res, err) => {
+  if (req.headers["user-agent"].includes("Instagram")) {
+    res.send(new randomBytes(3));
+  } else {
+    console.log(req.headers["user-agent"]);
+    res.redirect(req.headers.origin);
   }
-  {
-    root: __dirname;
-  }
-  res.sendFile("hello.txt", { root: __dirname }, function (err) {
-    console.log(err);
-  });
+  console.log(err);
 });
 
-// Listen to the App Engine-specified port, or 8080 otherwise
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}...`);
