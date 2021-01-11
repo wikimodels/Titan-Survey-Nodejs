@@ -1,11 +1,9 @@
 require("custom-env").env();
 const express = require("express");
-const useragent = require("express-useragent");
+//const useragent = require("express-useragent");
 const { randomBytes } = require("crypto");
 const app = express();
-//const envVariables = process.env;
-// Read vars from envVariables object
-//const { APP } = envVariables;
+
 app.use(function (req, res, next) {
   const allowedOrigins = [
     "http://127.0.0.1:8020",
@@ -15,6 +13,7 @@ app.use(function (req, res, next) {
     process.env["SURVEY_APP"],
     process.env["REPORT_APP"],
   ];
+  console.log(allowedOrigins);
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
@@ -41,7 +40,6 @@ app.use(function (req, res, next) {
 });
 
 app.get("/", (req, res) => {
-  console.log("App", process.env["APP"]);
   var ip =
     req.headers["x-forwarded-for"] ||
     req.connection.remoteAddress ||
@@ -51,11 +49,12 @@ app.get("/", (req, res) => {
 });
 
 app.get("/data", (req, res, err) => {
+   
   if (req.headers["user-agent"].includes("Instagram")) {
     res.send(new randomBytes(3));
-  } else {
-    console.log(req.headers["user-agent"]);
-    res.redirect(req.headers.origin);
+  } 
+   else {
+    res.redirect(process.env["SURVEY_APP"]);
   }
   console.log(err);
 });
