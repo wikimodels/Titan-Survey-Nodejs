@@ -8,6 +8,7 @@ app.use(function (req, res, next) {
   const allowedOrigins = [
     "http://127.0.0.1:8020",
     "http://localhost:4200",
+    "http://localhost:4000",
     "http://127.0.0.1:9000",
     "http://localhost:5000",
     process.env["SURVEY_APP"],
