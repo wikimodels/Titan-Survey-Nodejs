@@ -13,6 +13,7 @@ app.use(function (req, res, next) {
     "http://localhost:5000",
     process.env["SURVEY_APP"],
     process.env["REPORT_APP"],
+    process.env["REPORT_APP_GREETINGS"],
   ];
   console.log(allowedOrigins);
   const origin = req.headers.origin;
@@ -50,11 +51,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/data", (req, res, err) => {
-   
   if (req.headers["user-agent"].includes("Instagram")) {
     res.send(new randomBytes(3));
-  } 
-   else {
+  } else {
     res.redirect(process.env["SURVEY_APP"]);
   }
   console.log(err);
